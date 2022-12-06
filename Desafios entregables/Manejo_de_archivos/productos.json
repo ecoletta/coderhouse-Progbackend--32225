@@ -1,0 +1,29 @@
+[
+	{
+		"title": "Zelda Ocarina of time",
+		"description": "Juego Nintendo 64",
+		"price": 400,
+		"codigo": "codigo1",
+		"idCodigo": 1,
+		"thumbnail": "thumbnail",
+		"stock": 11
+	},
+	{
+		"title": "God of War",
+		"description": "Juego PS4",
+		"price": 500,
+		"codigo": "codigo3",
+		"idCodigo": 3,
+		"thumbnail": "Imagen",
+		"stock": 10
+	},
+	{
+		"title": "Zelda Majora Mask",
+		"description": "Juego Nintendo 64",
+		"price": 500,
+		"codigo": "codigo2",
+		"idCodigo": 4,
+		"thumbnail": "Imagen",
+		"stock": 10
+	}
+]
