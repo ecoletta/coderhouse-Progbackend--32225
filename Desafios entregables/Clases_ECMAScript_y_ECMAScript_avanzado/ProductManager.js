@@ -1,7 +1,15 @@
+const fs = require('fs')
+
 class ProductManager {
 
 constructor(){
     this.products = []
+    this.path = "./productos.json"
+    if(fs.existsSync(this.path)){
+        this.products = JSON.parse(fs.readFileSync(this.path,"utf-8"))
+    }else{
+        this.products =[]
+    }
 }
 
 getProductos(){
