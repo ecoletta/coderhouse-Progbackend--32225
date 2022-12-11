@@ -51,7 +51,7 @@ async agregarProducto(title, description, price, codigo, idCodigo = 0, thumbnail
             console.log(product)
             return product
         }else{
-            console.log("Not found");
+            console.log(`No se encuentra un producto con el id ${idCodigo}. `);
             return
         }
     }
@@ -63,6 +63,20 @@ async agregarProducto(title, description, price, codigo, idCodigo = 0, thumbnail
     }
 
     async deleteProduct(idCodigo){
+
+        const found = this.products.some(item => item.idCodigo === idCodigo)
+
+        if (found){
+            let array = JSON.parse(await fs.promises.readFile(this.path))
+            array = array.filter(item => item.idCodigo != idCodigo)
+
+            await fs.promises.writeFile(this.path, JSON.stringify(array, null, '\t'))
+            console.log(`El producto de id ${idCodigo} fue eliminado de la base de datos`)
+        }else{
+            console.log("El elemento a eliminar no se encuentra entre los productos")
+            return
+        }
+
         let array = JSON.parse(await fs.promises.readFile(this.path))
         array = array.filter(item => item.idCodigo != idCodigo)
 
@@ -82,12 +96,12 @@ async agregarProducto(title, description, price, codigo, idCodigo = 0, thumbnail
         
         let array = JSON.parse(await fs.promises.readFile(this.path))
         array.map(item =>{
-            if (item.idCodigo === idCodigo){
-                item.title = title
-                item.description = description
-                item.price = price
-                item.thumbnail = thumbnail
-                item.stock = stock
+            if (item.idCodigo === product.idCodigo){
+                item.title = product.title
+                item.description = product.description
+                item.price = product.price
+                item.thumbnail = product.thumbnail
+                item.stock = product.stock
             }
         })
 
@@ -112,12 +126,21 @@ const productos = new ProductManager();
 //MUESTRO LOS PRODUCTOS
 //console.log(productos.getProducts())
 
-//ELIMINO EL PRODUCTO DE ID 2
-//productos.deleteProduct(2)
-
 //MODIFICO EL PRODUCTO CON ID 1
 //productos.updateProduct(1,"Zelda Breath of wild","Juego Nintengo Switch",400, "imagen zelda",5)
 
 //VUELVO A MODIFICAR EL PRODUCTO ID 1
 //productos.updateProduct(1,"Zelda Ocarina of time","Juego Nintendo 64",400, "thumbnail",11)
+
+//CONSULTO ELEMENTO POR ID
+//productos.getProductById(2)
+
+//CONSULTO ELEMENTO POR ID QUE NO EXISTE
+//productos.getProductById(9)
+
+//ELIMINO EL PRODUCTO DE ID 2
+productos.deleteProduct(2)
+
+//ELIMINO EL PRODUCTO DE ID QUE NO EXISTE
+//productos.deleteProduct(9)
 
