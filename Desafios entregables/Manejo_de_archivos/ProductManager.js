@@ -73,17 +73,11 @@ async agregarProducto(title, description, price, codigo, idCodigo = 0, thumbnail
 
             await fs.promises.writeFile(this.path, JSON.stringify(array, null, '\t'))
             console.log(`El producto de id ${idCodigo} fue eliminado de la base de datos`)
+            return
         }else{
             console.log("El elemento a eliminar no se encuentra entre los productos")
             return
         }
-
-        let array = JSON.parse(await fs.promises.readFile(this.path))
-        array = array.filter(item => item.idCodigo != idCodigo)
-
-        await fs.promises.writeFile(this.path, JSON.stringify(array, null, '\t'))
-        console.log(`El producto de id ${idCodigo} fue eliminado de la base de datos`)
-
     }
 
     async updateProduct(idCodigo, title, description, price, thumbnail, stock){
@@ -140,13 +134,13 @@ const productos = new ProductManager();
 //productos.updateProduct(1,"Zelda Ocarina of time","Juego Nintendo 64",400, "thumbnail",11)
 
 //CONSULTO ELEMENTO POR ID
-console.log(productos.getProductById(2))
+//console.log(productos.getProductById(2))
 
 //CONSULTO ELEMENTO POR ID QUE NO EXISTE
 //productos.getProductById(9)
 
 //ELIMINO EL PRODUCTO DE ID 2
-//productos.deleteProduct(2)
+productos.deleteProduct(5)
 
 //ELIMINO EL PRODUCTO DE ID QUE NO EXISTE
 //productos.deleteProduct(9)
