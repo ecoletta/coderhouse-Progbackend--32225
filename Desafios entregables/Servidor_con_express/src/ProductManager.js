@@ -1,9 +1,9 @@
-const fs = require('fs')
+import fs from 'fs'
 
 class ProductManager {
 
 constructor(){
-    this.path = "./productos.json"
+    this.path = "./src/productos.json"
     if(fs.existsSync(this.path)){
         this.products = JSON.parse(fs.readFileSync(this.path,"utf-8"))
     }else{
@@ -44,13 +44,12 @@ async agregarProducto(title, description, price, codigo, idCodigo = 0, thumbnail
     }
 
     async getProductById(idCodigo){
-        const array = JSON.parse(await fs.promises.readFile(this.path))
+        let array = JSON.parse(await fs.promises.readFile(this.path))
 
-        let productA = array.filter((item) => item.idCodigo === idCodigo);
-        if (productA.length > 0){
-            const product = productA[0]
-            //console.log(product)
-            return product
+        let product = array.filter((item) => item.idCodigo === idCodigo);
+        if (product.length > 0){
+            console.log(product[0])
+            return product[0]
         }else{
             console.log(`No se encuentra un producto con el id ${idCodigo}. `);
             return
@@ -124,12 +123,6 @@ const productos = new ProductManager();
 //AGREGO PRODUCTO 3
 //productos.agregarProducto("God of War","Juego PS4",500,"codigo3",0,"Imagen",10);
 
-//AGREGO PRODUCTO 4
-//productos.agregarProducto("Final Fantasy XV","Juego PS4",300,"codigo4",0,"Imagen",15);
-
-//AGREGO PRODUCTO 5
-//productos.agregarProducto("Fire Emblem Three Houses","Juego Switch",500,"codigo5",0,"Imagen",5);
-
 //MUESTRO LOS PRODUCTOS
 //console.log(productos.getProducts())
 
@@ -140,7 +133,7 @@ const productos = new ProductManager();
 //productos.updateProduct(1,"Zelda Ocarina of time","Juego Nintendo 64",400, "thumbnail",11)
 
 //CONSULTO ELEMENTO POR ID
-console.log(productos.getProductById(2))
+//productos.getProductById(2)
 
 //CONSULTO ELEMENTO POR ID QUE NO EXISTE
 //productos.getProductById(9)
@@ -151,3 +144,4 @@ console.log(productos.getProductById(2))
 //ELIMINO EL PRODUCTO DE ID QUE NO EXISTE
 //productos.deleteProduct(9)
 
+export default new ProductManager()
