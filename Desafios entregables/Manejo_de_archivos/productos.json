@@ -34,14 +34,5 @@
 		"idCodigo": 4,
 		"thumbnail": "Imagen",
 		"stock": 15
-	},
-	{
-		"title": "Fire Emblem Three Houses",
-		"description": "Juego Switch",
-		"price": 500,
-		"codigo": "codigo5",
-		"idCodigo": 5,
-		"thumbnail": "Imagen",
-		"stock": 5
 	}
 ]

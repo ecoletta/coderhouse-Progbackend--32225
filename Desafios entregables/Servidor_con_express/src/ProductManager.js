@@ -72,17 +72,11 @@ async agregarProducto(title, description, price, codigo, idCodigo = 0, thumbnail
 
             await fs.promises.writeFile(this.path, JSON.stringify(array, null, '\t'))
             console.log(`El producto de id ${idCodigo} fue eliminado de la base de datos`)
+            return
         }else{
             console.log("El elemento a eliminar no se encuentra entre los productos")
             return
         }
-
-        let array = JSON.parse(await fs.promises.readFile(this.path))
-        array = array.filter(item => item.idCodigo != idCodigo)
-
-        await fs.promises.writeFile(this.path, JSON.stringify(array, null, '\t'))
-        console.log(`El producto de id ${idCodigo} fue eliminado de la base de datos`)
-
     }
 
     async updateProduct(idCodigo, title, description, price, thumbnail, stock){
