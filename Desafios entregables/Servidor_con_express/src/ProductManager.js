@@ -3,7 +3,7 @@ import fs from 'fs'
 class ProductManager {
 
 constructor(){
-    this.path = "./src/productos.json"
+    this.path = "./productos.json"
     if(fs.existsSync(this.path)){
         this.products = JSON.parse(fs.readFileSync(this.path,"utf-8"))
     }else{
@@ -48,7 +48,7 @@ async agregarProducto(title, description, price, codigo, idCodigo = 0, thumbnail
 
         let product = array.filter((item) => item.idCodigo === idCodigo);
         if (product.length > 0){
-            console.log(product[0])
+            //console.log(product[0])
             return product[0]
         }else{
             console.log(`No se encuentra un producto con el id ${idCodigo}. `);
