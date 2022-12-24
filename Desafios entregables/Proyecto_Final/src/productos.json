@@ -1,0 +1,47 @@
+[
+	{
+		"title": "Zelda Ocarina of time",
+		"description": "Juego Nintendo 64",
+		"price": 500,
+		"codigo": "codigo1",
+		"idCodigo": 1,
+		"thumbnail": "Imagen",
+		"stock": 10
+	},
+	{
+		"title": "Zelda Majora Mask",
+		"description": "Juego Nintendo 64",
+		"price": 500,
+		"codigo": "codigo2",
+		"idCodigo": 2,
+		"thumbnail": "Imagen",
+		"stock": 10
+	},
+	{
+		"title": "God of War",
+		"description": "Juego PS4",
+		"price": 500,
+		"codigo": "codigo3",
+		"idCodigo": 3,
+		"thumbnail": "Imagen",
+		"stock": 10
+	},
+	{
+		"title": "Final Fantasy XV",
+		"description": "Juego PS4",
+		"price": 300,
+		"codigo": "codigo4",
+		"idCodigo": 4,
+		"thumbnail": "Imagen",
+		"stock": 15
+	},
+	{
+		"title": "Fire Emblem Three Houses",
+		"description": "Juego Switch",
+		"price": 500,
+		"codigo": "codigo5",
+		"idCodigo": 5,
+		"thumbnail": "Imagen",
+		"stock": 5
+	}
+]
