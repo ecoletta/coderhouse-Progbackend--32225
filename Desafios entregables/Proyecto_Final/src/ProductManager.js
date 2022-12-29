@@ -11,18 +11,20 @@ constructor(){
     }
 }
 
-async agregarProducto(title, description, price, codigo, idCodigo = 0, thumbnail, stock){
-    let product = {
-        title,
-        description,
-        price,
-        codigo,
-        idCodigo: idCodigo || 0,
-        thumbnail,
-        stock
-        };
+async agregarProducto(product){
+    let producto = {
+        title : product.title,
+        description : product.description,
+        price: product.price,
+        codigo: product.codigo,
+        idCodigo : 0,
+        category: product.category,
+        thumbnail: product.thumbnail,
+        stock: product.stock,
+        status : product.status || true
+    };
 
-    const found = this.products.some(item => item.codigo === product.codigo)
+    const found = this.products.some(item => item.codigo === producto.codigo)
     
     if (!found){
         //pass
@@ -32,15 +34,15 @@ async agregarProducto(title, description, price, codigo, idCodigo = 0, thumbnail
     }
     
     if (this.products.length === 0){
-        product["idCodigo"] = 1;
+        producto["idCodigo"] = 1;
     }else{
-        product["idCodigo"] = this.products[this.products.length - 1]["idCodigo"] + 1;
+        producto["idCodigo"] = this.products[this.products.length - 1]["idCodigo"] + 1;
     }
 
-    this.products.push(product)
+    this.products.push(producto)
 
     await fs.promises.writeFile(this.path, JSON.stringify(this.products, null, '\t'))
-    console.log(`El producto ${product.title} fue agregado en la base de datos`)
+    console.log(`El producto ${producto.title} fue agregado en la base de datos`)
     }
 
     async getProductById(idCodigo){
@@ -48,7 +50,6 @@ async agregarProducto(title, description, price, codigo, idCodigo = 0, thumbnail
 
         let product = array.filter((item) => item.idCodigo === idCodigo);
         if (product.length > 0){
-            //console.log(product[0])
             return product[0]
         }else{
             console.log(`No se encuentra un producto con el id ${idCodigo}. `);
@@ -71,37 +72,33 @@ async agregarProducto(title, description, price, codigo, idCodigo = 0, thumbnail
             array = array.filter(item => item.idCodigo != idCodigo)
 
             await fs.promises.writeFile(this.path, JSON.stringify(array, null, '\t'))
-            console.log(`El producto de id ${idCodigo} fue eliminado de la base de datos`)
-            return
+            const respuesta = `El producto de id ${idCodigo} fue eliminado de la base de datos`
+            return respuesta
         }else{
-            console.log("El elemento a eliminar no se encuentra entre los productos")
-            return
+            const respuesta = "El elemento a eliminar no se encuentra entre los productos"
+            return respuesta
         }
     }
 
-    async updateProduct(idCodigo, title, description, price, thumbnail, stock){
-        let product = {
-            title,
-            description,
-            price,
-            thumbnail,
-            stock
-        };
-        
+    async updateProduct(product){
+               
         let array = JSON.parse(await fs.promises.readFile(this.path))
         array.map(item =>{
             if (item.idCodigo === product.idCodigo){
                 item.title = product.title
                 item.description = product.description
                 item.price = product.price
+                item.codigo = product.codigo
+                item.category = product.category
                 item.thumbnail = product.thumbnail
                 item.stock = product.stock
+                item.status = product.status
             }
         })
 
         await fs.promises.writeFile(this.path, JSON.stringify(array, null, '\t'))
-        console.log(`El producto de id ${idCodigo} fue modificado la base de datos`)
-
+        console.log(`El producto fue modificado la base de datos`)
+        return
     }
 }
 
@@ -109,13 +106,19 @@ async agregarProducto(title, description, price, codigo, idCodigo = 0, thumbnail
 const productos = new ProductManager();
 
 //AGREGO PRODUCTO 1
-//productos.agregarProducto("Zelda Ocarina of time","Juego Nintendo 64",500,"codigo1",0,"Imagen",10);
+//productos.agregarProducto("Zelda Ocarina of time","Juego Nintendo 64",500,"codigo1",0,"RPG","Imagen",10);
 
 //AGREGO PRODUCTO 2
-//productos.agregarProducto("Zelda Majora Mask","Juego Nintendo 64",500,"codigo2",0,"Imagen",10);
+//productos.agregarProducto("Zelda Majora Mask","Juego Nintendo 64",500,"codigo2",0,"RPG","Imagen",10);
 
 //AGREGO PRODUCTO 3
-//productos.agregarProducto("God of War","Juego PS4",500,"codigo3",0,"Imagen",10);
+//productos.agregarProducto("God of War","Juego PS4",500,"codigo3",0,"Action","Imagen",10);
+
+//AGREGO PRODUCTO 4
+//productos.agregarProducto("Final Fantasy XV","Juego PS4",400,"codigo4",0,"RPG","Imagen",15);
+
+//AGREGO PRODUCTO 5
+//productos.agregarProducto("Fire Emblem Three Houses","Switch",450,"codigo5",0,"RPG","Imagen",13);
 
 //MUESTRO LOS PRODUCTOS
 //console.log(productos.getProducts())
