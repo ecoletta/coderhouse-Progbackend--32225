@@ -5,24 +5,16 @@
 			{
 				"idProduct": 1,
 				"quantity": 1
+			},
+			{
+				"idProduct": 2,
+				"quantity": 3
 			}
 		]
 	},
 	{
 		"idCodigo": 2,
 		"products": [
-			{
-				"idProduct": 1,
-				"quantity": 1
-			},
-			{
-				"idProduct": 2,
-				"quantity": 1
-			},
-			{
-				"idProduct": 1,
-				"quantity": 1
-			},
 			{
 				"idProduct": 1,
 				"quantity": 1
@@ -43,7 +35,11 @@
 		"products": [
 			{
 				"idProduct": 1,
-				"quantity": 1
+				"quantity": 3
+			},
+			{
+				"idProduct": 2,
+				"quantity": 3
 			}
 		]
 	}
