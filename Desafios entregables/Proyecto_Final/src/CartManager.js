@@ -47,20 +47,34 @@ class CartManager {
 
     async updateCart(product,idCart){
         let array = JSON.parse(await fs.promises.readFile(this.path))
+        //console.log(array)
+        const indiceCart = array.findIndex(item => item.idCodigo === idCart)
+        console.log("indice carrito: " ,indiceCart)
+        //console.log(array[indiceCart].products)
+        
+        if (indiceCart === -1){
+            console.log("No se encontró el carrito")
+            return false
+        }
+        
+        const indiceProduct = array[indiceCart].products.findIndex(item => item.idProduct === product.idCodigo)
+        console.log("indice producto ",indiceProduct)
 
-        array.map(item =>{
-            if(item.idCodigo === idCart){
-                item.products.push({"idProduct": product.idCodigo, "quantity": 1})
-            }
-        })
+        if (indiceProduct === -1){
+            array[indiceCart].products.push({
+                "idProduct": product.idCodigo,
+                "quantity": 1
+            })
+        }else{
+            array[indiceCart].products[indiceProduct].quantity++
+        }
 
         await fs.promises.writeFile(this.path, JSON.stringify(array, null, '\t'))
         console.log(`El producto fue agregado en el carrito`)
+        return true
     }
 
 }
 
 ///////////////////////////////////////////
-//const carts = new CartManager();
-
 export default new CartManager()

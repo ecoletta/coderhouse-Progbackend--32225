@@ -16,9 +16,16 @@ router.post('/:idCart/product/:idProduct', async (req, res) => {
     const idProduct = parseInt(req.params.idProduct)
 
     const product = await ProductManager.getProductById(idProduct)
-    await CartManager.updateCart(product,idCart)
+    const resultado = await CartManager.updateCart(product, idCart)
+    console.log(resultado)
+    let info
+    if (resultado){
+        info = "Product added in cart"
+    }else{
+        info = "Cart not found"
+    }
 
-    res.status(201).json({info: "Product added in cart"})
+    res.status(201).json({info: info})
 })
 
 router.post('/', async (req, res) => {
