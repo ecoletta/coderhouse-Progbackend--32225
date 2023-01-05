@@ -1,0 +1,15 @@
+<div>
+    <h1>¡Hola {{name}}, estoy usando handlebars en home</h1>
+    <hr>
+</div>
+<div>
+    <ul>
+        {{#each products}}
+        <li>Titulo: {{this.title}}</li>
+        <li>Descripción: {{this.description}}</li>
+        <li>Precio: {{this.price}}</li>
+        <li>Stock: {{this.stock}}</li>
+        <hr>
+        {{/each}}
+    </ul>
+</div>
