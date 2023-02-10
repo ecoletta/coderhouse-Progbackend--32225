@@ -1,28 +1,23 @@
 import { Router } from "express";
-import ProductManager from "../ProductManager.js";
+//import ProductManager from "../daos/fileManager/ProductManager.js";
+import ProductManager from "../daos/dbManager/product.dao.js"
 
 const router = Router()
 
 router.get('/', async (req, res) =>{
-    const {limit} = req.query
-    let products = await ProductManager.getProducts()
+    const {limit, page, sort, query } = req.query
 
-    if(!limit){
-        res.status(200).json(products)
-    }else{
-        products = products.splice(0,limit)
-        res.status(200).json(products)
-    }
-    
+    console.log("El limite es : ", limit, page, sort, query)
+    let products = await ProductManager.getProducts(limit, sort, query)
+    res.status(200).json(products)
 })
 
-router.get('/:idCodigo', async (req, res) =>{
-    const idCodigo = parseInt( req.params.idCodigo )
-    const product = await (ProductManager.getProductById(idCodigo))
+router.get('/:id', async (req, res) =>{
+    const product = await (ProductManager.getProductById(req.params.id))
     res.status(200).json(product)
 })
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
     const { title, description, codigo, price, status = true, stock, category, thumbnail } = req.body
 
     if (!title){
@@ -56,7 +51,7 @@ router.post('/', (req, res) => {
     if (!thumbnail){
         throw new Error('Thumbnail is required')
     }
-
+    
     const product = {
         "title" : title,
         "description": description,
@@ -67,14 +62,15 @@ router.post('/', (req, res) => {
         "category": category,
         "thumbnail": thumbnail
     }
-    ProductManager.agregarProducto(product)
+    
+    await ProductManager.agregarProducto(product)
 
     res.status(201).json({info : "Created", product })
 
 })
 
-router.put('/:idCodigo', async (req, res) =>{
-    const idCodigo = req.params.idCodigo
+router.put('/:id', async (req, res) =>{
+    
     const { title, description, codigo, price, status = true, stock, category, thumbnail } = req.body
 
     if (!title){
@@ -112,7 +108,6 @@ router.put('/:idCodigo', async (req, res) =>{
     const product = {
         "title" : title,
         "description": description,
-        "idCodigo": parseInt(idCodigo),
         "codigo": codigo,
         "price": price,
         "status": status,
@@ -121,15 +116,13 @@ router.put('/:idCodigo', async (req, res) =>{
         "thumbnail": thumbnail
     }
 
-    await ProductManager.updateProduct(product)
+    await ProductManager.update(req.params.id, product)
 
     res.status(200).json({info: "Product Updated", product})
 })
 
-router.delete('/:idCodigo', async (req, res) => {
-    const idCodigo = parseInt( req.params.idCodigo)
-    
-    const respuesta = await ProductManager.deleteProduct(idCodigo)
+router.delete('/:id', async (req, res) => {
+    const respuesta = await ProductManager.delete(req.params.id)
     console.log(respuesta)
     res.status(200).json({info: respuesta})
 
