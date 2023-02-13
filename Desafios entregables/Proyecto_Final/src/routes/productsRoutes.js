@@ -1,5 +1,4 @@
 import { Router } from "express";
-//import ProductManager from "../daos/fileManager/ProductManager.js";
 import ProductManager from "../daos/dbManager/product.dao.js"
 
 const router = Router()
@@ -7,8 +6,8 @@ const router = Router()
 router.get('/', async (req, res) =>{
     const {limit, page, sort, query } = req.query
 
-    console.log("El limite es : ", limit, page, sort, query)
-    let products = await ProductManager.getProducts(limit, sort, query)
+    //console.log("Los parametros son: ", limit, page, sort, query)
+    let products = await ProductManager.getProducts(limit, page, sort, query)
     res.status(200).json(products)
 })
 
