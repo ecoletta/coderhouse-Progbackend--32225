@@ -10,11 +10,13 @@ class ProductDao {
         return await productModel.findById(id)
     }
 
-    async getProducts(limit = 10, sort, query){
+    async getProducts(limit = 10, page = 1, sort = 1, query){
 
-        const consulta = query
-        console.log("La consulta que quiero meter en find() es:" ,consulta)
-        return await productModel.find({category:{$eq:"RPG"}}).sort({price: sort }).limit(limit);
+        if(!query){
+            return await productModel.paginate({},{page: page, limit: limit, sort: sort});
+        }else{
+            return await productModel.paginate({category:{$eq:query}},{page: page, limit: limit, sort: sort});
+        }
     }
 
     async update(id, product){

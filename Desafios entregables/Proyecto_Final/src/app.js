@@ -18,7 +18,7 @@ app.use('/', express.static(__dirname + '/public'))
 //////////////// Mongo DB >>>>>>>>>>>>>>
 
 mongoose.set('strictQuery', true);
-mongoose.connect('mongodb://localhost:27017/ecommerce', (error) => {
+mongoose.connect('mongodb+srv://admin:admin123@cluster0.cn7if2y.mongodb.net/?retryWrites=true&w=majority', (error) => {
     if(error) {
         console.log('Error al conectarse a MongoDB', error);
     } else {

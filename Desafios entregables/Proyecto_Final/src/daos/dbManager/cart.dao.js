@@ -1,4 +1,4 @@
-import { cartModel } from "../../models/cart.model.js";
+import { cartModel } from "../../models/cart.modelbkp.js";
 
 class CartDao{
     async agregarcarrito(products){
