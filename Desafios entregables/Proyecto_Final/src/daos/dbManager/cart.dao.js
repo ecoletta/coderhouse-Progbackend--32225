@@ -1,4 +1,4 @@
-import { cartModel } from "../../models/cart.modelbkp.js";
+import { cartModel } from "../../models/cart.model.js";
 
 class CartDao{
     async agregarcarrito(products){
@@ -6,7 +6,7 @@ class CartDao{
     }
 
     async getCartById(id){
-        return await cartModel.findById(id);
+        return await cartModel.findById(id).populate('products.product');
     }
 
     async updateCart(idCart,product){
