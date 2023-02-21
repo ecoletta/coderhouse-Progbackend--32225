@@ -12,6 +12,4 @@ const cartSchema = new Schema({
     }
 })
 
-//En algun momento tengo que meter el polutate ahi en products y el pre
-
 export const cartModel = model(cartCollection, cartSchema);
