@@ -3,22 +3,46 @@ import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import productsRoutes from './routes/productsRoutes.js'
 import cartsRoutes from './routes/cartsRoutes.js'
+import viewRoutes from './routes/view.routes.js'
+import sessionRoutes from './routes/session.routes.js'
 import mongoose from 'mongoose';
+import handlebars from 'express-handlebars';
+import flash from 'connect-flash';
+import session from 'express-session';
+import MongoStore from 'connect-mongo';
 
 //Disponibilizo la variable __dirname 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const app = express()
 
+//Config server
+const app = express()
+app.use(flash());
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-
 app.use('/', express.static(__dirname + '/public'))
 
 //////////////// Mongo DB >>>>>>>>>>>>>>
 
 mongoose.set('strictQuery', true);
-mongoose.connect('mongodb+srv://admin:admin123@cluster0.cn7if2y.mongodb.net/?retryWrites=true&w=majority', (error) => {
+app.use(
+    session({
+        store: MongoStore.create({
+            mongoUrl: "mongodb://localhost:27017/ecommerce",
+            mongoOptions: {
+                useNewUrlParser: true,
+                useUnifiedTopology: true
+            },
+            ttl: 120,
+        }),
+        secret: "coderhouse",
+        resave: false,
+        saveUninitialized: false
+    })
+);
+
+
+mongoose.connect("mongodb://localhost:27017/ecommerce", (error) => {
     if(error) {
         console.log('Error al conectarse a MongoDB', error);
     } else {
@@ -28,14 +52,20 @@ mongoose.connect('mongodb+srv://admin:admin123@cluster0.cn7if2y.mongodb.net/?ret
 
 //////////////// Mongo DB <<<<<<<<<<<<<<
 
+//Handlebars config
+app.engine('hbs', handlebars.engine({
+    extname: '.hbs',
+    defaultLayout: 'main'
+}));
+app.set('view engine', 'hbs');
+app.set('views', `${__dirname}/views`);
+
 ////////////////Endpoints y ruteos >>>>>>>>>>>>>>
 
-app.get('/', (req, res) => {
-    res.status(200).sendFile('index.html')
-})
-
+app.use('/', viewRoutes);
 app.use('/api/products/',productsRoutes)
 app.use('/api/carts/',cartsRoutes)
+app.use('/session', sessionRoutes)
 
 app.get('*', (req, res) => {
     res.status(404).send("Recurso no encontrado en /*")

@@ -8,7 +8,7 @@ router.get('/', async (req, res) =>{
 
     //console.log("Los parametros son: ", limit, page, sort, query)
     let products = await ProductManager.getProducts(limit, page, sort, query)
-    res.status(200).json(products)
+    res.status(200).json({info: req.session.user, products})
 })
 
 router.get('/:id', async (req, res) =>{
