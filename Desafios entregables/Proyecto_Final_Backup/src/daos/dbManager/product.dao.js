@@ -10,7 +10,7 @@ class ProductDao {
         return await productModel.findById(id)
     }
 
-    async getProducts(limit = 10, page = 1, sort = '1', query){
+    async getProducts(limit = 10, page = 1, sort = 1, query){
 
         if(!query){
             return await productModel.paginate({},{page: page, limit: limit, sort: sort});

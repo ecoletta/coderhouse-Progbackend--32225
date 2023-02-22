@@ -5,7 +5,7 @@ import underscore from 'underscore'
 class CartManager {
 
     constructor(){
-        this.path = "./carritos.json"
+        this.path = "src/daos/fileManager/carritos.json"
         if(fs.existsSync(this.path)){
             this.carts = JSON.parse(fs.readFileSync(this.path,"utf-8"))
         }else{

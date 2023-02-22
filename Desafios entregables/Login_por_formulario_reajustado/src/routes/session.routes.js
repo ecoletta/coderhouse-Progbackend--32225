@@ -28,7 +28,7 @@ router.post('/register', async (req, res) => {
     
     if(!first_name || !last_name || !email || !age || !password){
         req.flash('error', 'Falta compleatar algun registro');
-        return res.status(400),redirect('/register');
+        return res.status(400).redirect('/register');
     }
 
     try{

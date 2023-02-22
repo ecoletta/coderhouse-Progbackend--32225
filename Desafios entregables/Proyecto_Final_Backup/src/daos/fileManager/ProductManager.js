@@ -3,7 +3,7 @@ import fs from 'fs'
 class ProductManager {
 
 constructor(){
-    this.path = "./productos.json"
+    this.path = "src/daos/fileManager/productos.json"
     if(fs.existsSync(this.path)){
         this.products = JSON.parse(fs.readFileSync(this.path,"utf-8"))
     }else{

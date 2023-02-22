@@ -3,10 +3,10 @@ import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import productsRoutes from './routes/productsRoutes.js'
 import cartsRoutes from './routes/cartsRoutes.js'
+import mongoose from 'mongoose';
 
 //Disponibilizo la variable __dirname 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-
 
 const app = express()
 
@@ -14,6 +14,19 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 app.use('/', express.static(__dirname + '/public'))
+
+//////////////// Mongo DB >>>>>>>>>>>>>>
+
+mongoose.set('strictQuery', true);
+mongoose.connect('mongodb+srv://admin:admin123@cluster0.cn7if2y.mongodb.net/?retryWrites=true&w=majority', (error) => {
+    if(error) {
+        console.log('Error al conectarse a MongoDB', error);
+    } else {
+        console.log('Conectado a Moongo DB - Database ecommerce')
+    }
+})
+
+//////////////// Mongo DB <<<<<<<<<<<<<<
 
 ////////////////Endpoints y ruteos >>>>>>>>>>>>>>
 
