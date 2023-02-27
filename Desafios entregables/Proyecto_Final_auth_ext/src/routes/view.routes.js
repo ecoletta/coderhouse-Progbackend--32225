@@ -2,15 +2,7 @@ import {Router} from 'express';
 
 const router = Router()
 
-router.get('/', (req, res) =>{
-    res.render('profile',{user: req.session.user})
-})
 
-router.get('/login', (req, res) => {
-    res.render('login')
-})
-
-/*ESTAS SON LAS RUTAS DE MI AUTENTICACION LOCAL
 router.get('/', (req, res) => {
     const isSession = req.session.user ? false : true;
     res.render('index', {
@@ -38,6 +30,5 @@ router.get('/profile', (req, res) =>{
     }
     res.render('profile',{title: 'Profile', user: req.session.user, message: req.flash('success')})
 })
-*/
 
 export default router;
