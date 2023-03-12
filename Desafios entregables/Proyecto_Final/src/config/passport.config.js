@@ -2,6 +2,7 @@ import passport from 'passport';
 import GithubStrategy from 'passport-github2';
 import { userModel } from '../models/user.model.js';
 import jwt from 'passport-jwt';
+import config from './config.js'
 
 const JWTStrategy = jwt.Strategy;
 const ExtractJwt = jwt.ExtractJwt;
@@ -9,8 +10,8 @@ const ExtractJwt = jwt.ExtractJwt;
 const initializaPassport = () => {
     passport.use(new GithubStrategy({
         clientID: 'Iv1.21e82d4bb4f510aa',
-        clientSecret: '1ea0762a8ec7de8e53a077b0a87d75c94e92e5c9',
-        callbackURL: 'http://localhost:8080/session/githubcallback',
+        clientSecret: config.gitHubClientSecret,
+        callbackURL: 'http://localhost:8080/api/session/githubcallback',
         scope: ['user:email']
     },
         async (accessToken, refreshToken, profile, done) => {
