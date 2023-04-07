@@ -32,7 +32,7 @@ class productValidator {
     }
 
     async createProduct(req, res) {
-       // try {
+        //try {
             const { title, description, codigo, price, status = true, stock, category, thumbnail } = req.body
 
             if (!title || !description || !codigo || !price || !status || !stock || !category || !thumbnail) {
@@ -41,9 +41,8 @@ class productValidator {
                     cause: paramError({ title, description, codigo, price, status, stock, category, thumbnail }),
                     message: 'Uno o mas parametros necesarios para el alta del producto no fue definido.',
                     code: errorList.INVALID_PARAMS
-                    
                 })
-            }
+         }
 
             const product = {
                 "title": title,
@@ -59,9 +58,9 @@ class productValidator {
             await productsServices.agregarProducto(product)
             return product
 
-    //    } catch (error) {
-      //      console.log(error.message)
-     //   }
+        //} catch (error) {
+        //    console.log(error.message)
+        //}
     }
 
     async updateProduct(req, res) {
