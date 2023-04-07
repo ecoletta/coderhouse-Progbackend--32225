@@ -1,5 +1,4 @@
 import ProductManager from "../daos/mongo/product.dao.js";
-import {generateProducts} from '../utils.js';
 
 class productServices {
     getProducts(limit, page, sort, query) {
@@ -10,19 +9,15 @@ class productServices {
         return ProductManager.getProductById(id)
     }
 
-    getMockingProducts() {
-        return generateProducts()
-    }
-
     agregarProducto(product) {
         return ProductManager.agregarProducto(product)
     }
 
-    update(id, product) {
-        return ProductManager.update(id, product)
+    update(id, product){
+        return ProductManager.update(id,product)
     }
 
-    delete(id) {
+    delete(id){
         return ProductManager.delete(id)
     }
 }

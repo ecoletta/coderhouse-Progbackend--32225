@@ -1,0 +1,46 @@
+[
+	{
+		"title": "Zelda Ocarina of Time",
+		"description": "Nintendo 64",
+		"price": "500",
+		"codigo": "codigo1",
+		"idCodigo": 1,
+		"category": "RPG",
+		"thumbnail": "Imagen",
+		"stock": 20,
+		"status": true
+	},
+	{
+		"title": "Zelda Majora Mask",
+		"description": "Nintendo 64",
+		"price": "500",
+		"codigo": "codigo2",
+		"idCodigo": 2,
+		"category": "RPG",
+		"thumbnail": "Imagen",
+		"stock": 20,
+		"status": true
+	},
+	{
+		"title": "God of War Ragnarok",
+		"description": "PS5",
+		"price": "450",
+		"codigo": "codigo3",
+		"idCodigo": 3,
+		"category": "Accion",
+		"thumbnail": "Imagen",
+		"stock": 20,
+		"status": true
+	},
+	{
+		"title": "Final Fantasy XV",
+		"description": "PS5",
+		"price": "300",
+		"codigo": "codigo4",
+		"idCodigo": 4,
+		"category": "RPG",
+		"thumbnail": "Imagen",
+		"stock": 20,
+		"status": true
+	}
+]
