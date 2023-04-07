@@ -1,4 +1,3 @@
-import { isString } from "underscore";
 import { productModel } from "../../models/product.model.js";
 
 class ProductDao {

@@ -12,11 +12,6 @@ class productsController {
         res.status(200).json(product)
     }
 
-    async getMockingProducts(req, res) {
-        const products = await (productValidator.getMockingProducts(req, res))
-        res.status(200).json(products)
-    }
-
     async createProduct(req, res) {
         const product = await productValidator.createProduct(req, res)
         res.status(201).json({ info: "Created", product })
