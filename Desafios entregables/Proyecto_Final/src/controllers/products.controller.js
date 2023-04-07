@@ -19,7 +19,12 @@ class productsController {
 
     async createProduct(req, res) {
         const product = await productValidator.createProduct(req, res)
-        res.status(201).json({ info: "Created", product })
+        if (product) {
+            res.status(201).json({ info: "Created", product })
+        }
+        else {
+            res.status(201).json({ info: "error" })
+        }
     }
 
     async updateProduct(req, res) {
