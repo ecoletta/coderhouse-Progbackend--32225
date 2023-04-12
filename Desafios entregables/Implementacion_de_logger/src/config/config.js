@@ -7,5 +7,6 @@ export default {
     mongoUrl: process.env.MONGO_URL,
     gitHubClientSecret: process.env.GITHUBCLIENTSECRET,
     secret: process.env.SECRET,
-    persistence: process.env.PERSISTENCE
+    persistence: process.env.PERSISTENCE,
+    nodeEnv: process.env.NODEENV
 }

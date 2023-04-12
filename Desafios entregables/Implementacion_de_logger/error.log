@@ -1,0 +1,15 @@
+fatal: ERROR Message
+fatal: FATAL Message
+error: ERROR Message
+fatal: FATAL Message
+error: ERROR Message
+fatal: FATAL Message
+error: ERROR Message
+fatal: FATAL Message
+error: ERROR Message
+fatal: FATAL Message
+error: ERROR Message
+error: Cast to ObjectId failed for value "2" (type string) at path "_id" for model "carts"
+error: Cart not found
+error: Cart not found
+error: Error en la petición de productos

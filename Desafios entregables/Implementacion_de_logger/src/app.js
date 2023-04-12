@@ -1,5 +1,5 @@
 import express from 'express';
-import __dirname from './utils.js'
+import __dirname from './utils/utils.js'
 import routes from './routes/index.routes.js'
 import mongoose from 'mongoose';
 import handlebars from 'express-handlebars';
@@ -9,6 +9,8 @@ import MongoStore from 'connect-mongo';
 import passport from 'passport';
 import initializaPassport from './config/passport.config.js';
 import config from './config/config.js';
+import errorHandler from './middleware/errors/index.js'
+import  {addLogger}  from './utils/logger.js';
 
 //Config server
 const app = express()
@@ -16,6 +18,8 @@ app.use(flash());
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use('/', express.static(__dirname + '/public'))
+app.use(addLogger);
+
 
 //////////////// Mongo DB >>>>>>>>>>>>>>
 mongoose.set('strictQuery', true);
@@ -65,6 +69,7 @@ app.use(passport.initialize())
 
 ////////////////ROUTING////////////////
 app.use('/', routes)
+app.use(errorHandler)
 
 app.listen(config.port, () => console.log(`Listening on port ${config.port}`))
 console.log(config)
